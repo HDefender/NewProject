@@ -16,6 +16,7 @@ public class UserService {
         this.users = new ArrayList<>(users);
     }
 
+    // FIXME: 13.03.2024 Подробно гляну этот сервис в следующей итерации ревью
     public void addUser(String FIO) { //метод добавления пользователя по ФИО
         User newUser = new User(FIO);//создаем пользователя
         boolean isEqual = false;
@@ -35,7 +36,7 @@ public class UserService {
             users.add(newUser); //добавление в список
         }
 
-    }
+    }// FIXME: 13.03.2024 больше пустых строк богу пустых строк:)
 
 
 

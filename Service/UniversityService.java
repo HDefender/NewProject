@@ -12,6 +12,8 @@ public class UniversityService {
         this.universities = new ArrayList<>(universities);
     }
 
+    // FIXME: 13.03.2024 поправь замечания, аналогичные с HosletService'ом и отформатируй кодяру)
+    //  после посмотрю этот сервис
     public void addUniversity (String universityName){ //метод добавления университета по названию
         University newUni = new University(universityName);//создаем пользователя
         boolean isEqual = false;

@@ -10,13 +10,17 @@ import PetProject.Service.*;
 
 import java.util.*;
 
+// FIXME: 13.03.2024 есть ощущение, что каждое меню должно быть инкапсулировано в собственный класс
 public class Menu {
+    // FIXME: 13.03.2024 модификаторы доступа
     UniversityService universityService = new UniversityService(new ArrayList<>());
     HostelService hostelService = new HostelService(new ArrayList<>());
     UserService userService = new UserService(new ArrayList<>());
     RoomService roomService = new RoomService(new ArrayList<>());
 
     Scanner sc = new Scanner(System.in);
+
+    // FIXME: 13.03.2024 такой конструктор и так существует по умолчанию
     public Menu() {
     }
     public void openAdminAuthorizationMenu (){
@@ -40,8 +44,14 @@ public class Menu {
 
     }
     public void doMainMenu() {
+        // FIXME: 13.03.2024 подобные блоки выводимого текста стоит вынести в приватные методы
         System.out.println("-------------------------------------");
         System.out.println("This is Hostel Management System. Please check one of the follow buttons");
+        // FIXME: 13.03.2024 каждый новый пункт меню добавлять вручную? Как насчет
+//        for (MenuButton button : MenuButton.values())
+//        {
+//            System.out.println(button);
+//        }
         System.out.println(MenuButton.ADD_PEOPLE_BUTTON_1);
         System.out.println(MenuButton.ADD_UNIVERSITY_BUTTON_2);
         System.out.println(MenuButton.ADD_HOSTEL_BUTTON_3);
@@ -61,6 +71,7 @@ public class Menu {
 
             switch (menuChoice) {
                 case 1:
+                    // FIXME: 13.03.2024 имена методов с маленькой буквы
                     AddPeople();
                 case 2:
                     AddUniversity();
@@ -91,6 +102,7 @@ public class Menu {
         sc.nextLine();
 
         if (menuAddPeopleChoice > 4 || menuAddPeopleChoice < 0) {
+            // FIXME: 13.03.2024 для этого логичнее использовать default в switch-case
             throw new MenuIncorrectButtonException();
         } else {
             switch (menuAddPeopleChoice) {
@@ -108,17 +120,23 @@ public class Menu {
         String FIO = sc.nextLine();
         //
         if (FIO == null || FIO.isEmpty()) { //если строка нулл
+            // FIXME: 13.03.2024 Некорректное использование. Пустая строка - не NPE.
+            //  В принципе, выбрасывать такое исключение вручную - моветон
             throw new NullPointerException("This element is empty"); //выбрасываем исключение
         }
         userService.addUser(FIO);
         doMainMenu();
     }
+
+    // FIXME: 13.03.2024 некорректное название этого и подобных методов.
+    //  Они не добавляют универ (и подобное), а запускают сценарий обработки по
+    //  добавлению (или другому действию) чего-то. Это стоит как минимум отразить в названии
     public void AddUniversity(){
         System.out.println("Please write name of university");
         String inputUniversityName = sc.next();
         if (inputUniversityName == null || inputUniversityName.isEmpty()) {
             throw new WrongInputException();
-        }
+        }// FIXME: 13.03.2024 плывет табуляция. Не только здесь
             universityService.addUniversity(inputUniversityName);
             doMainMenu();
 
